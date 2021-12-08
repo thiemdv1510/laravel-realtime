@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [\App\Http\Controllers\ChatsController::class, 'index'])->name('index');
 Route::get('messages', [\App\Http\Controllers\ChatsController::class, 'fetchMessages'])->name('fetchMessages');
 Route::post('messages', [\App\Http\Controllers\ChatsController::class, 'sendMessage'])->name('sendMessage');
+Route::post('delete/message', [\App\Http\Controllers\ChatsController::class, 'deleteMessage'])->name('deleteMessage');

@@ -44,9 +44,27 @@ const app = new Vue({
             .listen('MessageSent', (e) => {
                 this.messages.push({
                     message: e.message.message,
-                    user: e.user
+                    user: e.user,
+                    position: 'left',
+                    showIcon: true,
+                    read: 0
                 });
             });
+    },
+
+    watch: {
+        messages: function (messages) {
+            console.log(messages.length - 1)
+            for (const key in messages) {
+                if (key == (messages.length - 1)) {
+                    this.messages[key].showIcon = true
+                    console.log(this.messages, 'check ìn for')
+                } else {
+                    this.messages[key].showIcon = false
+                }
+            }
+            console.log(this.messages)
+        }
     },
 
     methods: {
@@ -57,11 +75,21 @@ const app = new Vue({
         },
 
         addMessage(message) {
+            console.log(message)
+            message.position = 'right'
             this.messages.push(message);
+            console.log(message,this.messages)
 
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
+        },
+
+        clearMessage() {
+            axios.post('delete/message').then(function (response) {
+                //console.log(response.data);
+            });
+            this.fetchMessages()
         }
     }
 });

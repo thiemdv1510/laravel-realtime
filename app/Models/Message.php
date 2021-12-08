@@ -11,7 +11,10 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['message'];
+    protected $fillable = ['message', 'user_id', 'order_by', 'read', 'clear'];
+
+    const CLEAR = 1;
+    const DONT_CLEAR = 0;
 
     /**
      * A message belong to a user

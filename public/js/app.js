@@ -34809,7 +34809,7 @@ var render = function () {
         "button",
         {
           staticClass: "btn btn-primary btn-sm height-37",
-          attrs: { id: "btn-chat" },
+          attrs: { disabled: _vm.newMessage === "", id: "btn-chat" },
           on: { click: _vm.sendMessage },
         },
         [_vm._v("\n            Send\n        ")]

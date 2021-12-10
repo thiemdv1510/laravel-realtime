@@ -16,3 +16,6 @@ export default {
     props: ['messages']
 };
 </script>
+<style scoped>
+@import '../../css/styles.scss';
+</style>

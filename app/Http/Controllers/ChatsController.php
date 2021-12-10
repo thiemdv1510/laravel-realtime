@@ -45,6 +45,7 @@ class ChatsController extends Controller
             }
             $item->user_id === $user->id ? $item->position = 'right' : $item->position = 'left';
             $count++;
+            $item->date = date('H:i:s d-m-y ', strtotime($item->created_at));
         }
         $data = array_values(Arr::sort($data, function ($item) {
             return $item->id;

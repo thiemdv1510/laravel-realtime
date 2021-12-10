@@ -28,9 +28,12 @@
     overflow-x: hidden;
     color: #f0f0f0;
     border-radius: 18px 18px 4px 18px;
-    padding: 8px 12px;
+    padding: 8px 0;
     display: block;
     margin-bottom: 5px;
+    text-align: end;
+    padding-right: 16px;
+    padding-left: 16px;
 }
 .chat-dont-me {
     background-color: #e4e6eb;
@@ -60,4 +63,35 @@
 .padding-right-26 {
     padding-right: 26px;
 }
+.format-sub-info {
+    color: #ccc;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+}
+.padding-right-5 {
+    padding-right: 5px !important;
+}
+.padding-left-5 {
+    padding-left: 5px !important;
+}
+.direction-column {
+    flex-direction: column
+}
+.justify-end {
+    display: flex;
+    justify-content: flex-end;
+}
+.justify-start {
+    display: flex;
+    justify-content: flex-start;
+}
+.direction-row {
+    display: flex;
+    flex-direction: row;
+}
+.padding-left-16 {
+    padding-left: 16px;
+}
+
 

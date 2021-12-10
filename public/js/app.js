@@ -5308,8 +5308,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['messages']
+  props: ['messages'],
+  data: function data() {
+    return {
+      selectHover: null
+    };
+  },
+  methods: {
+    hoverItemMessage: function hoverItemMessage(id) {
+      this.selectHover = id;
+    },
+    outHover: function outHover() {
+      this.selectHover = null;
+    }
+  }
 });
 
 /***/ }),
@@ -10582,7 +10600,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".margin-left-5 {\n    margin-left: 5px !important;\n}\n.height-37 {\n    height: 37px;\n}\n.border-radius-4 {\n    border-radius: 4px !important;\n}\n.flex {\n    display: flex;\n}\n.right {\n    justify-content: end;\n}\n.left {\n    justify-content: start;\n}\n.list-style-none {\n    list-style: none;\n}\n.chat-me {\n    background-color: rgb(0, 132, 255);\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #f0f0f0;\n    border-radius: 18px 18px 4px 18px;\n    padding: 8px 12px;\n    display: block;\n    margin-bottom: 5px;\n}\n.chat-dont-me {\n    background-color: #e4e6eb;\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #0f0f10;\n    position: relative;\n    border-radius: 18px 18px 18px 4px;\n    padding: 8px 12px;\n    display: block;\n    margin-bottom: 5px;\n}\n.body-chat {\n    max-height: 500px;\n    overflow-y: auto;\n}\n.check-send {\n    background: #ccc;\n    border-radius: 50%;\n    display: flex;\n    margin-top: 10px;\n    margin-left: 5px;\n}\n.padding-right-26 {\n    padding-right: 26px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".margin-left-5 {\n    margin-left: 5px !important;\n}\n.height-37 {\n    height: 37px;\n}\n.border-radius-4 {\n    border-radius: 4px !important;\n}\n.flex {\n    display: flex;\n}\n.right {\n    justify-content: end;\n}\n.left {\n    justify-content: start;\n}\n.list-style-none {\n    list-style: none;\n}\n.chat-me {\n    background-color: rgb(0, 132, 255);\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #f0f0f0;\n    border-radius: 18px 18px 4px 18px;\n    padding: 8px 0;\n    display: block;\n    margin-bottom: 5px;\n    text-align: end;\n    padding-right: 16px;\n    padding-left: 16px;\n}\n.chat-dont-me {\n    background-color: #e4e6eb;\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #0f0f10;\n    position: relative;\n    border-radius: 18px 18px 18px 4px;\n    padding: 8px 12px;\n    display: block;\n    margin-bottom: 5px;\n}\n.body-chat {\n    max-height: 500px;\n    overflow-y: auto;\n}\n.check-send {\n    background: #ccc;\n    border-radius: 50%;\n    display: flex;\n    margin-top: 10px;\n    margin-left: 5px;\n}\n.padding-right-26 {\n    padding-right: 26px;\n}\n.format-sub-info {\n    color: #ccc;\n    font-size: 10px;\n    display: flex;\n    align-items: center;\n}\n.padding-right-5 {\n    padding-right: 5px !important;\n}\n.padding-left-5 {\n    padding-left: 5px !important;\n}\n.direction-column {\n    flex-direction: column\n}\n.justify-end {\n    display: flex;\n    justify-content: flex-end;\n}\n.justify-start {\n    display: flex;\n    justify-content: flex-start;\n}\n.direction-row {\n    display: flex;\n    flex-direction: row;\n}\n.padding-left-16 {\n    padding-left: 16px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34926,48 +34944,93 @@ var render = function () {
     "ul",
     { staticClass: "chat list-style-none" },
     _vm._l(_vm.messages, function (message) {
-      return _c("li", { staticClass: "left clearfix" }, [
-        _c(
-          "div",
-          {
-            staticClass: "chat-body clearfix flex",
-            class: {
-              right: message.position === "right",
-              left: message.position === "left",
-              "padding-right-26": !message.showIcon,
-            },
+      return _c(
+        "li",
+        {
+          staticClass: "clearfix",
+          class: {
+            "justify-end": message.position === "right",
+            "justify-start": message.position === "left",
           },
-          [
-            _c(
-              "p",
-              {
-                class: {
-                  "chat-me": message.position === "right",
-                  "chat-dont-me": message.position === "left",
-                },
+          on: {
+            mouseover: function ($event) {
+              return _vm.hoverItemMessage(message.id)
+            },
+            mouseleave: _vm.outHover,
+          },
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "chat-body clearfix flex direction-column",
+              class: {
+                right: message.position === "right",
+                left: message.position === "left",
+                "padding-right-26": !message.showIcon,
               },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(message.message) +
-                    "\n            "
-                ),
-              ]
-            ),
-            _vm._v(" "),
-            message.showIcon && message.position === "right"
-              ? _c("iframe", {
-                  staticClass: "check-send",
-                  attrs: {
-                    width: "20px",
-                    height: "20px",
-                    src: "./image/check.svg",
+            },
+            [
+              message.position === "right" && _vm.selectHover === message.id
+                ? _c(
+                    "span",
+                    { staticClass: "format-sub-info padding-right-5 right" },
+                    [_vm._v(_vm._s(message.date) + " ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              message.position === "left" && _vm.selectHover === message.id
+                ? _c(
+                    "span",
+                    { staticClass: "format-sub-info padding-left-5 left" },
+                    [_vm._v(_vm._s(message.date) + " ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: {
+                    "direction-row":
+                      message.showIcon && message.position === "right",
                   },
-                })
-              : _vm._e(),
-          ]
-        ),
-      ])
+                },
+                [
+                  _c(
+                    "p",
+                    {
+                      class: {
+                        "chat-me": message.position === "right",
+                        "chat-dont-me": message.position === "left",
+                        "padding-left-16":
+                          message.showIcon && message.position === "right",
+                      },
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(message.message) +
+                          "\n                "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  message.showIcon && message.position === "right"
+                    ? _c("iframe", {
+                        staticClass: "check-send",
+                        attrs: {
+                          width: "20px",
+                          height: "20px",
+                          src: "./image/check.svg",
+                        },
+                      })
+                    : _vm._e(),
+                ]
+              ),
+            ]
+          ),
+        ]
+      )
     }),
     0
   )

@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-8 col-md-4 col-md-offset-2">
+            <div class="col-12 col-md-4 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Chats</div>
 

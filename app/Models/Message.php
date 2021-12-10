@@ -16,6 +16,9 @@ class Message extends Model
     const CLEAR = 1;
     const DONT_CLEAR = 0;
 
+    const READ = 1;
+    const DONT_READ = 0;
+
     /**
      * A message belong to a user
      *

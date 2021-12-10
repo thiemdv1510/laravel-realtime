@@ -46,11 +46,11 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            {{--@if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif--}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -66,6 +66,9 @@
                                     <a class="dropdown-item" href="{{ route('index') }}">
                                         Room chat
                                     </a>
+                                    @if (Auth::user()->id === 1)
+                                        <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @endif
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>

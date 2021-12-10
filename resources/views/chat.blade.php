@@ -9,12 +9,18 @@
                     <div class="panel-heading">Chats</div>
 
                     <div class="panel-body body-chat">
-                        <chat-messages :messages="messages"></chat-messages>
+                        <chat-messages
+                            :messages="messages"
+                            :selecthover="selected"
+                            v-on:hoveritemmessage="hoverItemMessage"
+                            v-on:outhover="outHover"
+                        ></chat-messages>
                     </div>
                     <div class="panel-footer">
                         <chat-form
                             v-on:messagesent="addMessage"
                             v-on:clearmessageall="clearMessage"
+                            v-on:handleinputchat="handleInputChat"
                             :user="{{ \Illuminate\Support\Facades\Auth::user() }}"
                         ></chat-form>
                     </div>

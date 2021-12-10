@@ -81,6 +81,23 @@ class ChatsController extends Controller
     public function deleteMessage(): array
     {
         DB::table('messages')->where('id','>=', 0)->update(['clear' => Message::CLEAR]);
+
+        return ['status' => 'Message Sent!'];
+    }
+
+    /**
+     * Delete message
+     *
+     * @return string[]
+     */
+    public function updateRead(Request $request): array {
+        $user = Auth::user();
+        $user_id = $user->id;
+        $record = DB::table('messages')
+            ->where('user_id', '<>',$user_id)
+            ->where('message', $request->get('message'))
+            ->update(['read' => Message::READ]);
+
         return ['status' => 'Message Sent!'];
     }
 }

@@ -34,7 +34,8 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        messages: []
+        messages: [],
+        selected: null
     },
 
     created() {
@@ -78,7 +79,6 @@ const app = new Vue({
             console.log(message)
             message.position = 'right'
             this.messages.push(message);
-            console.log(message,this.messages)
 
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
@@ -90,6 +90,21 @@ const app = new Vue({
                 //console.log(response.data);
             });
             this.fetchMessages()
+        },
+
+        handleInputChat() {
+            const item = this.messages.slice(-1).pop()
+            axios.post('update/read', {message: item.message}).then(function (response) {
+                //console.log(response.data);
+            });
+        },
+
+        hoverItemMessage(id) {
+            this.selected = id
+        },
+
+        outHover() {
+            this.selected = null
         }
     }
 });

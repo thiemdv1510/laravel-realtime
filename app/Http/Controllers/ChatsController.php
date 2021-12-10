@@ -63,7 +63,7 @@ class ChatsController extends Controller
     public function sendMessage(Request $request)
     {
         $user = Auth::user();
-
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $message = $user->messages()->create([
             'message' => $request->input('message')
         ]);
@@ -80,7 +80,27 @@ class ChatsController extends Controller
      */
     public function deleteMessage(): array
     {
-        DB::table('messages')->where('id','>=', 0)->update(['clear' => Message::CLEAR]);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+        DB::table('messages')->where('id','>=', 0)
+            ->update(['clear' => Message::CLEAR, 'clear_date' => date('Y-m-d H:i:s')]);
+
+        return ['status' => 'Message Sent!'];
+    }
+
+    /**
+     * Delete message
+     *
+     * @return string[]
+     */
+    public function updateRead(Request $request): array {
+        $user = Auth::user();
+        $user_id = $user->id;
+        $record = DB::table('messages')
+            ->where('user_id', '<>',$user_id)
+            ->where('message', $request->get('message'))
+            ->update(['read' => Message::READ, 'read_date' => date('Y-m-d H:i:s')]);
+
         return ['status' => 'Message Sent!'];
     }
 }

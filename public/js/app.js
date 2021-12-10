@@ -5258,6 +5258,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['user'],
   data: function data() {
@@ -5278,6 +5281,9 @@ __webpack_require__.r(__webpack_exports__);
         user: this.user,
         message: this.newMessage
       });
+    },
+    handleInputChat: function handleInputChat() {
+      this.$emit('handleinputchat');
     }
   }
 });
@@ -5312,20 +5318,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['messages'],
-  data: function data() {
-    return {
-      selectHover: null
-    };
+  props: ['messages', 'selecthover'],
+  computed: {
+    select: {
+      get: function get() {
+        return this.selecthover;
+      }
+    }
   },
   methods: {
     hoverItemMessage: function hoverItemMessage(id) {
-      this.selectHover = id;
+      this.$emit('hoveritemmessage', id);
     },
     outHover: function outHover() {
-      this.selectHover = null;
+      this.$emit('outhover');
     }
   }
 });
@@ -5403,7 +5410,8 @@ Vue.component('chat-form', (__webpack_require__(/*! ./components/ChatForm */ "./
 var app = new Vue({
   el: '#app',
   data: {
-    messages: []
+    messages: [],
+    selected: null
   },
   created: function created() {
     var _this = this;
@@ -5447,7 +5455,6 @@ var app = new Vue({
       console.log(message);
       message.position = 'right';
       this.messages.push(message);
-      console.log(message, this.messages);
       axios.post('/messages', message).then(function (response) {
         console.log(response.data);
       });
@@ -5456,6 +5463,19 @@ var app = new Vue({
       axios.post('delete/message').then(function (response) {//console.log(response.data);
       });
       this.fetchMessages();
+    },
+    handleInputChat: function handleInputChat() {
+      var item = this.messages.slice(-1).pop();
+      axios.post('update/read', {
+        message: item.message
+      }).then(function (response) {//console.log(response.data);
+      });
+    },
+    hoverItemMessage: function hoverItemMessage(id) {
+      this.selected = id;
+    },
+    outHover: function outHover() {
+      this.selected = null;
     }
   }
 });
@@ -10600,7 +10620,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".margin-left-5 {\n    margin-left: 5px !important;\n}\n.height-37 {\n    height: 37px;\n}\n.border-radius-4 {\n    border-radius: 4px !important;\n}\n.flex {\n    display: flex;\n}\n.right {\n    justify-content: end;\n}\n.left {\n    justify-content: start;\n}\n.list-style-none {\n    list-style: none;\n}\n.chat-me {\n    background-color: rgb(0, 132, 255);\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #f0f0f0;\n    border-radius: 18px 18px 4px 18px;\n    padding: 8px 0;\n    display: block;\n    margin-bottom: 5px;\n    text-align: end;\n    padding-right: 16px;\n    padding-left: 16px;\n}\n.chat-dont-me {\n    background-color: #e4e6eb;\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #0f0f10;\n    position: relative;\n    border-radius: 18px 18px 18px 4px;\n    padding: 8px 12px;\n    display: block;\n    margin-bottom: 5px;\n}\n.body-chat {\n    max-height: 500px;\n    overflow-y: auto;\n}\n.check-send {\n    background: #ccc;\n    border-radius: 50%;\n    display: flex;\n    margin-top: 10px;\n    margin-left: 5px;\n}\n.padding-right-26 {\n    padding-right: 26px;\n}\n.format-sub-info {\n    color: #ccc;\n    font-size: 10px;\n    display: flex;\n    align-items: center;\n}\n.padding-right-5 {\n    padding-right: 5px !important;\n}\n.padding-left-5 {\n    padding-left: 5px !important;\n}\n.direction-column {\n    flex-direction: column\n}\n.justify-end {\n    display: flex;\n    justify-content: flex-end;\n}\n.justify-start {\n    display: flex;\n    justify-content: flex-start;\n}\n.direction-row {\n    display: flex;\n    flex-direction: row;\n}\n.padding-left-16 {\n    padding-left: 16px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".margin-left-5 {\n    margin-left: 5px !important;\n}\n.height-37 {\n    height: 37px;\n}\n.border-radius-4 {\n    border-radius: 4px !important;\n}\n.flex {\n    display: flex;\n}\n.right {\n    justify-content: end;\n}\n.left {\n    justify-content: start;\n}\n.list-style-none {\n    list-style: none;\n}\n.chat-me {\n    background-color: rgb(0, 132, 255);\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #f0f0f0;\n    border-radius: 18px 18px 4px 18px;\n    padding: 8px 0;\n    display: block;\n    margin-bottom: 5px;\n    text-align: end;\n    padding-right: 16px;\n    padding-left: 16px;\n}\n.chat-dont-me {\n    background-color: #e4e6eb;\n    z-index: 1;\n    overflow-y: hidden;\n    word-break: break-word;\n    max-width: 564px;\n    overflow-x: hidden;\n    color: #0f0f10;\n    position: relative;\n    border-radius: 18px 18px 18px 4px;\n    padding: 8px 12px;\n    display: block;\n    margin-bottom: 5px;\n}\n.body-chat {\n    max-height: 500px;\n    overflow-y: auto;\n}\n.check-send {\n    border-radius: 50%;\n    display: flex;\n    margin-top: 10px;\n    margin-left: 5px;\n}\n.check-sended {\n    background: #ccc;\n    border-radius: 50%;\n    display: flex;\n    margin-top: 10px;\n    margin-left: 5px;\n    .bi-check {\n        color: white;\n    }\n}\n.padding-right-26 {\n    padding-right: 26px;\n}\n.format-sub-info {\n    color: #ccc;\n    font-size: 10px;\n    display: flex;\n    align-items: center;\n}\n.padding-right-5 {\n    padding-right: 5px !important;\n}\n.padding-left-5 {\n    padding-left: 5px !important;\n}\n.direction-column {\n    flex-direction: column\n}\n.justify-end {\n    display: flex;\n    justify-content: flex-end;\n}\n.justify-start {\n    display: flex;\n    justify-content: flex-start;\n}\n.direction-row {\n    display: flex;\n    flex-direction: row;\n}\n.padding-left-16 {\n    padding-left: 16px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34885,6 +34905,7 @@ var render = function () {
           }
           return _vm.sendMessage.apply(null, arguments)
         },
+        click: _vm.handleInputChat,
         input: function ($event) {
           if ($event.target.composing) {
             return
@@ -34953,6 +34974,9 @@ var render = function () {
             "justify-start": message.position === "left",
           },
           on: {
+            click: function ($event) {
+              return _vm.hoverItemMessage(message.id)
+            },
             mouseover: function ($event) {
               return _vm.hoverItemMessage(message.id)
             },
@@ -34971,7 +34995,7 @@ var render = function () {
               },
             },
             [
-              message.position === "right" && _vm.selectHover === message.id
+              message.position === "right" && _vm.select === message.id
                 ? _c(
                     "span",
                     { staticClass: "format-sub-info padding-right-5 right" },
@@ -34979,7 +35003,7 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              message.position === "left" && _vm.selectHover === message.id
+              message.position === "left" && _vm.select === message.id
                 ? _c(
                     "span",
                     { staticClass: "format-sub-info padding-left-5 left" },
@@ -35017,7 +35041,8 @@ var render = function () {
                   _vm._v(" "),
                   message.showIcon && message.position === "right"
                     ? _c("iframe", {
-                        staticClass: "check-send",
+                        class:
+                          message.read === 1 ? "check-sended" : "check-send",
                         attrs: {
                           width: "20px",
                           height: "20px",

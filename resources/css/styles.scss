@@ -54,11 +54,20 @@
     overflow-y: auto;
 }
 .check-send {
+    border-radius: 50%;
+    display: flex;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.check-sended {
     background: #ccc;
     border-radius: 50%;
     display: flex;
     margin-top: 10px;
     margin-left: 5px;
+    .bi-check {
+        color: white;
+    }
 }
 .padding-right-26 {
     padding-right: 26px;

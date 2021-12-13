@@ -1,10 +1,9 @@
 <template>
     <div class="input-group">
-        <input id="btn-input" type="text" name="message" class="form-control input-sm border-radius-4"
-               placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage"
-               @click="handleInputChat"
-        >
-
+        <textarea class="form-control border-radius-4" name="message" rows="1" v-model="newMessage" @keyup.enter="sendMessage"
+                  placeholder="Type your message here..."
+                  @click="handleInputChat"
+        ></textarea>
         <span class="input-group-btn margin-left-5">
             <button :disabled="newMessage === ''" class="btn btn-primary btn-sm height-37" id="btn-chat" @click="sendMessage">
                 Send

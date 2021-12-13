@@ -5260,7 +5260,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['user'],
   data: function data() {
@@ -5317,7 +5316,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['messages', 'selecthover'],
   computed: {
@@ -5328,6 +5326,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    nl2br: function nl2br(str, is_xhtml) {
+      if (typeof str === 'undefined' || str === null) {
+        return '';
+      }
+
+      var breakTag = is_xhtml || typeof is_xhtml === 'undefined' ? '<br />' : '<br>';
+      return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+    },
     hoverItemMessage: function hoverItemMessage(id) {
       this.$emit('hoveritemmessage', id);
     },
@@ -5428,19 +5434,16 @@ var app = new Vue({
     });
   },
   watch: {
-    messages: function messages(_messages) {
-      console.log(_messages.length - 1);
-
-      for (var key in _messages) {
-        if (key == _messages.length - 1) {
-          this.messages[key].showIcon = true;
-          console.log(this.messages, 'check ìn for');
-        } else {
-          this.messages[key].showIcon = false;
+    messages: {
+      handler: function handler(messages) {
+        for (var key in messages) {
+          if (key == messages.length - 1) {
+            this.messages[key].showIcon = true;
+          } else {
+            this.messages[key].showIcon = false;
+          }
         }
       }
-
-      console.log(this.messages);
     }
   },
   methods: {
@@ -34878,7 +34881,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "input-group" }, [
-    _c("input", {
+    _c("textarea", {
       directives: [
         {
           name: "model",
@@ -34887,11 +34890,10 @@ var render = function () {
           expression: "newMessage",
         },
       ],
-      staticClass: "form-control input-sm border-radius-4",
+      staticClass: "form-control border-radius-4",
       attrs: {
-        id: "btn-input",
-        type: "text",
         name: "message",
+        rows: "1",
         placeholder: "Type your message here...",
       },
       domProps: { value: _vm.newMessage },
@@ -35020,24 +35022,16 @@ var render = function () {
                   },
                 },
                 [
-                  _c(
-                    "p",
-                    {
-                      class: {
-                        "chat-me": message.position === "right",
-                        "chat-dont-me": message.position === "left",
-                        "padding-left-16":
-                          message.showIcon && message.position === "right",
-                      },
+                  _c("div", {
+                    staticClass: "content",
+                    class: {
+                      "chat-me": message.position === "right",
+                      "chat-dont-me": message.position === "left",
+                      "padding-left-16":
+                        message.showIcon && message.position === "right",
                     },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(message.message) +
-                          "\n                "
-                      ),
-                    ]
-                  ),
+                    domProps: { innerHTML: _vm._s(_vm.nl2br(message.message)) },
+                  }),
                   _vm._v(" "),
                   message.showIcon && message.position === "right"
                     ? _c("iframe", {

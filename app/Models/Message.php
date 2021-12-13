@@ -11,7 +11,7 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['message', 'user_id', 'order_by', 'read', 'clear', 'clear_date', 'read_date'];
+    protected $fillable = ['message', 'user_id', 'order_by', 'read', 'clear', 'clear_date', 'read_date', 'type'];
 
     const CLEAR = 1;
     const DONT_CLEAR = 0;

@@ -54,18 +54,20 @@ const app = new Vue({
     },
 
     watch: {
-        messages: function (messages) {
-            console.log(messages.length - 1)
-            for (const key in messages) {
-                if (key == (messages.length - 1)) {
-                    this.messages[key].showIcon = true
-                    console.log(this.messages, 'check ìn for')
-                } else {
-                    this.messages[key].showIcon = false
-                }
-            }
-            console.log(this.messages)
-        }
+        messages: {
+          handler: function (messages) {
+              for (const key in messages) {
+                  if (key == (messages.length - 1)) {
+                      this.messages[key].showIcon = true
+                  } else {
+                      this.messages[key].showIcon = false
+                  }
+
+
+              }
+          }
+        },
+
     },
 
     methods: {

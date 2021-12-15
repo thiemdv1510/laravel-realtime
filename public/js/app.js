@@ -53034,8 +53034,7 @@ var render = function () {
                         attrs: {
                           width: "auto",
                           height: "200",
-                          src:
-                            "http://127.0.0.1:8000/images/" + message.message,
+                          src: "http://18.140.3.232/images/" + message.message,
                           alt: "",
                         },
                       })

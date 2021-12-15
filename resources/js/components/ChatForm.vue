@@ -21,6 +21,7 @@
             v-bind:allow-multiple="false"
             accepted-file-types="image/jpeg, image/png"
             server="/upload/image"
+            :chunkSize="10000000"
             v-on:init="handleFilePondInit"
             v-bind:files="myFiles"
             :dropOnPage="true"

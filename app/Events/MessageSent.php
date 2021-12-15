@@ -30,6 +30,8 @@ class MessageSent implements ShouldBroadcast
      */
     public $message;
 
+    public $type;
+
     /**
      * Create a new event instance.
      *

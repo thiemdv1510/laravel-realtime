@@ -7,7 +7,7 @@
                 <div :class="{'direction-row': message.showIcon && message.position === 'right'}">
                     <div class="content" v-if="message.type === 0" v-html="nl2br(message.message)" :class="{'chat-me': message.position === 'right', 'chat-dont-me': message.position === 'left', 'padding-left-16': message.showIcon && message.position === 'right'}">
                     </div>
-                    <img class="image" width="auto" height="200" v-if="message.type === 1" :src="`http://`+url+`/images/`+message.message" alt="">
+                    <img class="image" width="auto" height="200" v-if="message.type === 1" :src="'http://127.0.0.1:8000/images/'+message.message" alt="">
                     <iframe v-if="message.showIcon && message.position === 'right'" :class="message.read === 1 ? 'check-sended' : 'check-send'" width="20px" height="20px" src="./image/check.svg"></iframe>
                 </div>
             </div>
@@ -27,6 +27,18 @@ export default {
         select: {
             get() {
                 return this.selecthover
+            }
+        }
+    },
+
+    watch: {
+        messages() {
+            for (const i in this.messages) {
+                const check = this.messages[i].message.split('.')
+                console.log(check.length)
+                if (check.length === 2 && check[0].length === 10) {
+                    this.messages[i].type = 1
+                }
             }
         }
     },

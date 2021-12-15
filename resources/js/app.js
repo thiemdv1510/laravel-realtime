@@ -35,18 +35,18 @@ const app = new Vue({
 
     data: {
         messages: [],
-        selected: null
+        selected: null,
+        type: 0
     },
 
     created() {
         this.fetchMessages();
-
         Echo.private('chat')
             .listen('MessageSent', (e) => {
                 this.messages.push({
                     message: e.message.message,
                     user: e.user,
-                    type: e.type,
+                    type: this.type,
                     position: 'left',
                     showIcon: true,
                     read: 0
@@ -108,6 +108,10 @@ const app = new Vue({
 
         outHover() {
             this.selected = null
+        },
+
+        updateType(type) {
+            this.type = type
         }
     }
 });

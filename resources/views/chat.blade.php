@@ -21,6 +21,7 @@
                             v-on:messagesent="addMessage"
                             v-on:clearmessageall="clearMessage"
                             v-on:handleinputchat="handleInputChat"
+                            v-on:updatetype="updateType"
                             :user="{{ \Illuminate\Support\Facades\Auth::user() }}"
                         ></chat-form>
                     </div>

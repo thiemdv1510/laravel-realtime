@@ -5302,7 +5302,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -5310,7 +5309,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_1___default()((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_4___default()), (filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_5___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['user'],
+  props: ['user', 'typeprop'],
   components: {
     FilePond: FilePond
   },
@@ -5320,6 +5319,13 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_1___default()((filepond_plu
       myFiles: [],
       image: ''
     };
+  },
+  computed: {
+    type: {
+      get: function get() {
+        return this.typeprop;
+      }
+    }
   },
   methods: {
     uploadSuccess: function uploadSuccess() {
@@ -5344,7 +5350,9 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_1___default()((filepond_plu
                   type: 1
                 });
 
-              case 3:
+                _this.$emit('updatetype', 1);
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -5361,6 +5369,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_1___default()((filepond_plu
         message: this.newMessage,
         type: 0
       });
+      this.$emit('updatetype', 0);
       this.newMessage = '';
     },
     clearMessage: function clearMessage() {
@@ -5416,6 +5425,18 @@ __webpack_require__.r(__webpack_exports__);
     select: {
       get: function get() {
         return this.selecthover;
+      }
+    }
+  },
+  watch: {
+    messages: function messages() {
+      for (var i in this.messages) {
+        var check = this.messages[i].message.split('.');
+        console.log(check.length);
+
+        if (check.length === 2 && check[0].length === 10) {
+          this.messages[i].type = 1;
+        }
       }
     }
   },
@@ -5511,7 +5532,8 @@ var app = new Vue({
   el: '#app',
   data: {
     messages: [],
-    selected: null
+    selected: null,
+    type: 0
   },
   created: function created() {
     var _this = this;
@@ -5521,7 +5543,7 @@ var app = new Vue({
       _this.messages.push({
         message: e.message.message,
         user: e.user,
-        type: e.type,
+        type: _this.type,
         position: 'left',
         showIcon: true,
         read: 0
@@ -5574,6 +5596,9 @@ var app = new Vue({
     },
     outHover: function outHover() {
       this.selected = null;
+    },
+    updateType: function updateType(type) {
+      this.type = type;
     }
   }
 });
@@ -52900,11 +52925,7 @@ var render = function () {
           files: _vm.myFiles,
           dropOnPage: true,
         },
-        on: {
-          init: _vm.handleFilePondInit,
-          processfiles: _vm.uploadSuccess,
-          initfile: _vm.initFile,
-        },
+        on: { init: _vm.handleFilePondInit, processfiles: _vm.uploadSuccess },
       }),
     ],
     1
@@ -53014,7 +53035,7 @@ var render = function () {
                           width: "auto",
                           height: "200",
                           src:
-                            "http://" + _vm.url + "/images/" + message.message,
+                            "http://127.0.0.1:8000/images/" + message.message,
                           alt: "",
                         },
                       })

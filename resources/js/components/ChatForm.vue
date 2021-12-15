@@ -25,7 +25,6 @@
             v-bind:files="myFiles"
             :dropOnPage="true"
             v-on:processfiles="uploadSuccess"
-            v-on:initfile="initFile"
         />
     </div>
 
@@ -44,7 +43,7 @@ const FilePond = vueFilePond(
 );
 
 export default {
-    props: ['user'],
+    props: ['user', 'typeprop'],
     components: {
         FilePond,
     },
@@ -53,6 +52,13 @@ export default {
             newMessage: '',
             myFiles: [],
             image: '',
+        }
+    },
+    computed: {
+        type: {
+            get () {
+                return this.typeprop
+            }
         }
     },
 
@@ -66,6 +72,7 @@ export default {
                 message: this.image,
                 type: 1
             });
+            this.$emit('updatetype', 1)
 
         },
         handleFilePondInit: function () {
@@ -77,7 +84,7 @@ export default {
                 message: this.newMessage,
                 type: 0
             });
-
+            this.$emit('updatetype', 0)
             this.newMessage = ''
         },
         clearMessage() {

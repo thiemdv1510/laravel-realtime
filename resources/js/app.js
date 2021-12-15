@@ -46,6 +46,7 @@ const app = new Vue({
                 this.messages.push({
                     message: e.message.message,
                     user: e.user,
+                    type: e.type,
                     position: 'left',
                     showIcon: true,
                     read: 0

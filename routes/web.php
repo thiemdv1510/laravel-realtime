@@ -26,3 +26,5 @@ Route::get('messages', [\App\Http\Controllers\ChatsController::class, 'fetchMess
 Route::post('messages', [\App\Http\Controllers\ChatsController::class, 'sendMessage'])->name('sendMessage');
 Route::post('delete/message', [\App\Http\Controllers\ChatsController::class, 'deleteMessage'])->name('deleteMessage');
 Route::post('update/read', [\App\Http\Controllers\ChatsController::class, 'updateRead'])->name('updateRead');
+Route::post('upload/image', [\App\Http\Controllers\ChatsController::class, 'uploadImage'])->name('uploadImage');
+Route::post('message/user', [\App\Http\Controllers\ChatsController::class, 'getLastMessageByUser'])->name('getLastMessageByUser');

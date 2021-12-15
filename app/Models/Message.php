@@ -19,6 +19,9 @@ class Message extends Model
     const READ = 1;
     const DONT_READ = 0;
 
+    const TYPE_TEXT = 0;
+    const TYPE_IMAGE = 1;
+
     /**
      * A message belong to a user
      *

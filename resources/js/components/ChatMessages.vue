@@ -5,8 +5,9 @@
                 <span class="format-sub-info padding-right-5 right" v-if="message.position === 'right' && select === message.id">{{message.date}} </span>
                 <span class="format-sub-info padding-left-5 left" v-if="message.position === 'left' && select === message.id">{{message.date}} </span>
                 <div :class="{'direction-row': message.showIcon && message.position === 'right'}">
-                    <div class="content" v-html="nl2br(message.message)" :class="{'chat-me': message.position === 'right', 'chat-dont-me': message.position === 'left', 'padding-left-16': message.showIcon && message.position === 'right'}">
+                    <div class="content" v-if="message.type === 0" v-html="nl2br(message.message)" :class="{'chat-me': message.position === 'right', 'chat-dont-me': message.position === 'left', 'padding-left-16': message.showIcon && message.position === 'right'}">
                     </div>
+                    <img class="image" width="auto" height="200" v-if="message.type === 1" :src="`http://`+url+`/images/`+message.message" alt="">
                     <iframe v-if="message.showIcon && message.position === 'right'" :class="message.read === 1 ? 'check-sended' : 'check-send'" width="20px" height="20px" src="./image/check.svg"></iframe>
                 </div>
             </div>
@@ -17,7 +18,11 @@
 <script>
 export default {
     props: ['messages', 'selecthover'],
-
+    data() {
+        return {
+            url: window.location.hostname
+        }
+    },
     computed: {
         select: {
             get() {
@@ -40,9 +45,14 @@ export default {
         outHover () {
             this.$emit('outhover')
         }
-    }
+    },
 };
 </script>
 <style scoped>
+.image {
+    border-radius: 9px;
+    box-shadow: 3px 3px 11px 1px #d8d8d8;
+    margin-bottom: 5px;
+}
 @import '../../css/styles.scss';
 </style>

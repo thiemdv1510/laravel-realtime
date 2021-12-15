@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Nette\Utils\Image;
 
 class ChatsController extends Controller
 {
@@ -65,7 +67,8 @@ class ChatsController extends Controller
         $user = Auth::user();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $message = $user->messages()->create([
-            'message' => $request->input('message')
+            'message' => $request->input('message'),
+            'type'=> $request->input('type')
         ]);
 
         broadcast(new MessageSent($user, $message))->toOthers();
@@ -102,5 +105,28 @@ class ChatsController extends Controller
             ->update(['read' => Message::READ, 'read_date' => date('Y-m-d H:i:s')]);
 
         return ['status' => 'Message Sent!'];
+    }
+
+    public function uploadImage(Request $request) {
+        $user = Auth::user();
+
+        $file = $request->file('imageUpload');
+        $fileName =  time() . '.' . $file->getClientOriginalExtension();
+        $file->move('images', $fileName);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+        $message = $user->messages()->create([
+            'message' => $fileName,
+            'type' => Message::TYPE_IMAGE,
+            'clear' => Message::CLEAR
+        ]);
+
+        return true;
+    }
+
+    public function getLastMessageByUser(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $item = DB::table('messages')->where('user_id', $request->get('userId'))->orderBy('id', 'DESC')->first();
+        return \response()->json(['name'=>$item->message]);
     }
 }

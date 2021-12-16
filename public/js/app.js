@@ -5542,7 +5542,8 @@ var app = new Vue({
   data: {
     messages: [],
     selected: null,
-    type: 0
+    type: 0,
+    count: 0
   },
   created: function created() {
     var _this = this;
@@ -5572,7 +5573,18 @@ var app = new Vue({
       }
     }
   },
+  updated: function updated() {
+    if (this.count === 0) {
+      this.scrollToEnd();
+    }
+
+    this.count++;
+  },
   methods: {
+    scrollToEnd: function scrollToEnd() {
+      var content = this.$refs.messagesContainer;
+      content.scrollTop = content.scrollHeight;
+    },
     fetchMessages: function fetchMessages() {
       var _this2 = this;
 
@@ -57376,7 +57388,8 @@ var render = function () {
                         attrs: {
                           width: "auto",
                           height: "200",
-                          src: "http://18.140.3.232/images/" + message.message,
+                          src:
+                            "http://127.0.0.1:8000/images/" + message.message,
                           alt: "",
                         },
                       })

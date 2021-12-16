@@ -1,18 +1,18 @@
 <template>
-    <ul class="chat list-style-none">
-        <li @click="hoverItemMessage(message.id)" @mouseover="hoverItemMessage(message.id)" @mouseleave="outHover" class="clearfix" :class="{'justify-end': message.position === 'right', 'justify-start': message.position === 'left'}" v-for="message in messages">
-            <div class="chat-body clearfix flex direction-column" :class="{'right': message.position === 'right', 'left': message.position === 'left','padding-right-26': !message.showIcon}">
-                <span class="format-sub-info padding-right-5 right" v-if="message.position === 'right' && select === message.id">{{message.date}} </span>
-                <span class="format-sub-info padding-left-5 left" v-if="message.position === 'left' && select === message.id">{{message.date}} </span>
-                <div :class="{'direction-row': message.showIcon && message.position === 'right'}">
-                    <div class="content" v-if="message.type === 0" v-html="nl2br(message.message)" :class="{'chat-me': message.position === 'right', 'chat-dont-me': message.position === 'left', 'padding-left-16': message.showIcon && message.position === 'right'}">
+        <ul class="chat list-style-none">
+            <li @click="hoverItemMessage(message.id)" @mouseover="hoverItemMessage(message.id)" @mouseleave="outHover" class="clearfix" :class="{'justify-end': message.position === 'right', 'justify-start': message.position === 'left'}" v-for="message in messages">
+                <div class="chat-body clearfix flex direction-column" :class="{'right': message.position === 'right', 'left': message.position === 'left','padding-right-26': !message.showIcon}">
+                    <span class="format-sub-info padding-right-5 right" v-if="message.position === 'right' && select === message.id">{{message.date}} </span>
+                    <span class="format-sub-info padding-left-5 left" v-if="message.position === 'left' && select === message.id">{{message.date}} </span>
+                    <div :class="{'direction-row': message.showIcon && message.position === 'right'}">
+                        <div class="content" v-if="message.type === 0" v-html="nl2br(message.message)" :class="{'chat-me': message.position === 'right', 'chat-dont-me': message.position === 'left', 'padding-left-16': message.showIcon && message.position === 'right'}">
+                        </div>
+                        <img class="image" v-viewer width="auto" height="200" v-if="message.type === 1" :src="'http://127.0.0.1:8000/images/'+message.message" alt="">
+                        <iframe v-if="message.showIcon && message.position === 'right'" :class="message.read === 1 ? 'check-sended' : 'check-send'" width="20px" height="20px" src="./image/check.svg"></iframe>
                     </div>
-                    <img class="image" v-viewer width="auto" height="200" v-if="message.type === 1" :src="'http://18.140.3.232/images/'+message.message" alt="">
-                    <iframe v-if="message.showIcon && message.position === 'right'" :class="message.read === 1 ? 'check-sended' : 'check-send'" width="20px" height="20px" src="./image/check.svg"></iframe>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
 </template>
 
 <script>
@@ -34,7 +34,6 @@ export default {
             }
         }
     },
-
     watch: {
         messages() {
             for (const i in this.messages) {

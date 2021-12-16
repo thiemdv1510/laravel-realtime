@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Chats</div>
 
-                    <div class="panel-body body-chat">
+                    <div class="panel-body body-chat" ref="messagesContainer">
                         <chat-messages
                             :messages="messages"
                             :selecthover="selected"

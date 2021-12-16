@@ -36,7 +36,8 @@ const app = new Vue({
     data: {
         messages: [],
         selected: null,
-        type: 0
+        type: 0,
+        count: 0
     },
 
     created() {
@@ -53,7 +54,6 @@ const app = new Vue({
                 });
             });
     },
-
     watch: {
         messages: {
           handler: function (messages) {
@@ -70,8 +70,18 @@ const app = new Vue({
         },
 
     },
+    updated () {
+        if (this.count === 0) {
+            this.scrollToEnd();
+        }
+        this.count++
+    },
 
     methods: {
+        scrollToEnd () {
+            const content = this.$refs.messagesContainer;
+            content.scrollTop = content.scrollHeight;
+        },
         fetchMessages() {
             axios.get('/messages').then(response => {
                 this.messages = response.data;

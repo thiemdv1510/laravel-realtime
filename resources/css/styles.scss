@@ -112,6 +112,14 @@
         max-height: 296px !important;
         overflow-y: auto;
     }
+    .text {
+        position: absolute;
+        color: white;
+        font-size: 26px;
+        top: 140px !important;
+        left: 10% !important;
+        font-weight: bold;
+    }
 }
 
 .bounce-enter-active {
@@ -137,8 +145,8 @@
     position: absolute;
     color: white;
     font-size: 26px;
-    top: 160px;
-    left: 24%;
+    top: 185px;
+    left: 10%;
     font-weight: bold;
 }
 

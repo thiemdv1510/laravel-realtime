@@ -73,7 +73,7 @@ const app = new Vue({
 
     },
     updated () {
-        if (this.count === 0) {
+        if (this.count === 1) {
             this.scrollToEnd();
         }
         this.count++
@@ -133,7 +133,6 @@ const app = new Vue({
         },
 
         addMessage(message) {
-            console.log(message)
             message.position = 'right'
             this.messages.push(message);
 

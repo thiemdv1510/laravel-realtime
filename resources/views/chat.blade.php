@@ -7,7 +7,12 @@
             <div class="col-12 col-md-4 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Chats</div>
+                    <transition name="bounce">
+                        <p class="text" v-if="show">Merry Christmas.</p>
+                    </transition>
+                    <div class="fireworks-example">
 
+                    </div>
                     <div class="panel-body body-chat" ref="messagesContainer">
                         <chat-messages
                             :messages="messages"

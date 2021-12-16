@@ -1,4 +1,5 @@
 <template>
+    <div>
         <ul class="chat list-style-none">
             <li @click="hoverItemMessage(message.id)" @mouseover="hoverItemMessage(message.id)" @mouseleave="outHover" class="clearfix" :class="{'justify-end': message.position === 'right', 'justify-start': message.position === 'left'}" v-for="message in messages">
                 <div class="chat-body clearfix flex direction-column" :class="{'right': message.position === 'right', 'left': message.position === 'left','padding-right-26': !message.showIcon}">
@@ -13,6 +14,10 @@
                 </div>
             </li>
         </ul>
+
+
+    </div>
+
 </template>
 
 <script>
@@ -20,13 +25,17 @@ import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 import Vue from 'vue'
 Vue.use(Viewer)
+
 export default {
     props: ['messages', 'selecthover'],
+
     data() {
         return {
-            url: window.location.hostname
+            url: window.location.hostname,
+
         }
     },
+
     computed: {
         select: {
             get() {
@@ -34,6 +43,7 @@ export default {
             }
         }
     },
+
     watch: {
         messages() {
             for (const i in this.messages) {
@@ -69,5 +79,7 @@ export default {
     box-shadow: 3px 3px 11px 1px #d8d8d8;
     margin-bottom: 5px;
 }
+
+
 @import '../../css/styles.scss';
 </style>

@@ -29,6 +29,7 @@
         "filepond-plugin-image-preview": "^4.6.10",
         "laravel-echo": "^1.11.3",
         "pusher-js": "^7.0.3",
+        "v-viewer": "^1.6.4",
         "vue-filepond": "^6.0.3"
     }
 }

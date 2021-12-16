@@ -37,7 +37,7 @@ class ChatsController extends Controller
     public function fetchMessages()
     {
         $user = Auth::user();
-        $data = Message::with('user')->where('clear',Message::DONT_CLEAR)->orderBy('created_at', 'desc')->limit(10)->get();
+        $data = Message::with('user')->where('clear',Message::DONT_CLEAR)->orderBy('created_at', 'desc')->limit(50)->get();
         $count = 0;
         foreach ($data as $item) {
             if ($count === 0) {

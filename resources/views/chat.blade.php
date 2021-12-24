@@ -4,11 +4,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-4 col-md-offset-2">
-                <div class="panel panel-default">
+            <div class="col-12 col-md-4 col-md-offset-2 position-relative">
                     <div class="panel-heading">Chats</div>
                     <transition name="bounce">
-                        <p class="text" v-if="show">Chúc em giang sinh vui vẻ hạnh phúc nhé !</p>
+                        <span class="text" v-if="show">Chúc em giang sinh vui vẻ hạnh phúc nhé !</span>
                     </transition>
                     <div class="fireworks-example">
                     </div>
@@ -29,7 +28,6 @@
                             :user="{{ \Illuminate\Support\Facades\Auth::user() }}"
                         ></chat-form>
                     </div>
-                </div>
             </div>
         </div>
     </div>

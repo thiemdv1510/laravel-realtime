@@ -129,4 +129,15 @@ class ChatsController extends Controller
         $item = DB::table('messages')->where('user_id', $request->get('userId'))->orderBy('id', 'DESC')->first();
         return \response()->json(['name'=>$item->message]);
     }
+
+    public function createLog(): bool
+    {
+        $user = Auth::user();
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        if ($user->id !== 1) {
+            DB::table('logs')->insert(['user_id' => $user->id, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')]);
+        }
+
+        return true;
+    }
 }

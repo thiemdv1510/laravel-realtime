@@ -44,6 +44,7 @@ const app = new Vue({
 
     created() {
         this.fetchMessages();
+        this.createLog()
         Echo.private('chat')
             .listen('MessageSent', (e) => {
                 this.messages.push({
@@ -165,6 +166,12 @@ const app = new Vue({
 
         updateType(type) {
             this.type = type
+        },
+
+        createLog() {
+            axios.post('create/log').then(function (response) {
+                //console.log(response.data);
+            });
         }
     }
 });

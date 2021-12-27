@@ -28,3 +28,4 @@ Route::post('delete/message', [\App\Http\Controllers\ChatsController::class, 'de
 Route::post('update/read', [\App\Http\Controllers\ChatsController::class, 'updateRead'])->name('updateRead');
 Route::post('upload/image', [\App\Http\Controllers\ChatsController::class, 'uploadImage'])->name('uploadImage');
 Route::post('message/user', [\App\Http\Controllers\ChatsController::class, 'getLastMessageByUser'])->name('getLastMessageByUser');
+Route::post('create/log', [\App\Http\Controllers\ChatsController::class, 'createLog'])->name('createLog');

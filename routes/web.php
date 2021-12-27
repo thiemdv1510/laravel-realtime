@@ -29,3 +29,5 @@ Route::post('update/read', [\App\Http\Controllers\ChatsController::class, 'updat
 Route::post('upload/image', [\App\Http\Controllers\ChatsController::class, 'uploadImage'])->name('uploadImage');
 Route::post('message/user', [\App\Http\Controllers\ChatsController::class, 'getLastMessageByUser'])->name('getLastMessageByUser');
 Route::post('create/log', [\App\Http\Controllers\ChatsController::class, 'createLog'])->name('createLog');
+Route::get('log', [\App\Http\Controllers\ChatsController::class, 'log'])->name('log');
+

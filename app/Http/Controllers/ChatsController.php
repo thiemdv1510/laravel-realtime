@@ -140,4 +140,10 @@ class ChatsController extends Controller
 
         return true;
     }
+
+    public function log()
+    {
+        $records = DB::table('logs')->limit(100)->get();
+        return view('log', compact('records'));
+    }
 }

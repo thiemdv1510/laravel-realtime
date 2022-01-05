@@ -143,7 +143,7 @@ class ChatsController extends Controller
 
     public function log()
     {
-        $records = DB::table('logs')->limit(100)->get();
+        $records = DB::table('logs')->orderBy('id', 'DESC')->limit(100)->get();
         return view('log', compact('records'));
     }
 }

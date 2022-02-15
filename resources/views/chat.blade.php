@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-12 col-md-4 col-md-offset-2 position-relative">
                     <div class="panel-heading">Chats</div>
-                    <transition name="bounce">
+<!--                    <transition name="bounce">
                         <span class="text" v-if="show">Chúc em giang sinh vui vẻ hạnh phúc nhé !</span>
                     </transition>
-                    <div class="fireworks-example">
+                    <div class="fireworks-example">-->
                     </div>
                     <div class="panel-body body-chat" ref="messagesContainer">
                         <chat-messages

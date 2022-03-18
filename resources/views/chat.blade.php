@@ -9,8 +9,8 @@
 <!--                    <transition name="bounce">
                         <span class="text" v-if="show">Chúc em giang sinh vui vẻ hạnh phúc nhé !</span>
                     </transition>
-                    <div class="fireworks-example">-->
-                    </div>
+                    <div class="fireworks-example">
+                    </div>-->
                     <div class="panel-body body-chat" ref="messagesContainer">
                         <chat-messages
                             :messages="messages"
